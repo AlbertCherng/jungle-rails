@@ -44,16 +44,35 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
-        <li>
-          <%= link_to cart_path do %>
-            <%= fa_icon "user" %> Login
-          <% end %>
+
+        <% if current_user %>
+
+          <li>
+            Signed in as <%= current_user.first_name %>
+          </li>
+
+          <li>
+            <%= link_to session_path(current_user.id), method: :delete do %>
+              <%= fa_icon "sign-out" %> Sign Out
+            <% end %>
+          </li>
+
+        <% else %>
+
+          <li>
+            <%= link_to new_session_path do %>
+              <%= fa_icon "user" %> Log In
+            <% end %>
+          </li>
+          <li>
+             <%= link_to new_user_path do %>
+              <%= fa_icon "user-plus" %> Register
+            <% end %>
+          </li>
+
+        <% end %>
         </li>
-        <li>
-           <%= link_to new_user_path do %>
-            <%= fa_icon "user-plus" %> Register
-          <% end %>
-        </li>
+
       </ul>
     </div>
   </div>

@@ -6,11 +6,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if user.save
-      session[:user_id] = user.id
-      redirect_to '/'
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to root_path
     else
-      redirect_to '/signup'
+      redirect_to new_user_path
     end
   end
 
@@ -21,7 +21,7 @@ private
       :first_name,
       :last_name,
       :email,
-      :password_digest,
+      :password,
       :password_confirmation)
   end
 
