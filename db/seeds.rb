@@ -18,6 +18,15 @@ raise "Development seeds only (for now)!" unless Rails.env.development?
 
 # Let's do this ...
 
+## USER
+
+User.create!({
+  first_name: "John",
+  last_name: "Doe",
+  email: "johndoe@gmail.com",
+  password_digest: 12345678
+  })
+
 ## CATEGORIES
 
 puts "Finding or Creating Categories ..."
@@ -32,13 +41,19 @@ puts "Re-creating Products ..."
 
 Product.destroy_all
 
-cat1.products.create!({
+product1 = cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
   quantity: 0,
   price: 64.99
 })
+
+product1.reviews.create!({
+  description: "Great product. 10/10 would buy again",
+  rating: 5,
+  user_id: 1
+  })
 
 cat1.products.create!({
   name:  'Women\'s Zebra pants',
@@ -56,13 +71,19 @@ cat1.products.create!({
   price: 34.49
 })
 
-cat1.products.create!({
+product2 = cat1.products.create!({
   name:  'Hipster Socks',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel4.jpg'),
   quantity: 8,
   price: 25.00
 })
+
+product2.reviews.create!({
+  description: "Great socks. Very hipster.",
+  rating: 10,
+  user_id: 1
+  })
 
 cat1.products.create!({
   name:  'Russian Spy Shoes',
