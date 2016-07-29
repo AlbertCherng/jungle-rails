@@ -14,6 +14,7 @@
 
       <div class="col-sm-8">
         <dl class="dl-horizontal">
+          <h3> Product Details </h3>
           <dt>Name</dt>
           <dd><%= @product.name %></dd>
           <dt>Description</dt>
@@ -22,6 +23,53 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <br>
+
+          <h3> User Reviews </h3>
+
+          <% @reviews.each do |review| %>
+
+          <dt>Product Ratings</dt>
+          <dd> <%= review.rating %> </dd>
+          <dt> Review Description </dt>
+          <dd> <%= review.description  %> </dd>
+          <br>
+
+          <% end %>
+
+           <h3> Add your review </h3>
+
+          <%= form_for [@product, @review] do |form| %>
+
+            <% if form.object.errors.any? %>
+              <div class="alert alert-danger">
+                <strong>The following errors prevented saving:</strong>
+                <ul>
+                  <% form.object.errors.full_messages.each do |error| %>
+                    <li><%= error %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+
+            <div class="form-group">
+            <%= form.label :rating %>
+            <%= form.select :rating, options_for_select(1..10), { include_blank: true }, class: 'form-control' %>
+            </div>
+
+
+            <div class="form-group">
+              <%= form.label :description %>
+              <%= form.text_area :description, class: 'form-control' %>
+            </div>
+
+            <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
+
+          <% end %>
+
+
+
         </dl>
       </div>
     </div>

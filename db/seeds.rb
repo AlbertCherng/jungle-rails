@@ -20,12 +20,23 @@ raise "Development seeds only (for now)!" unless Rails.env.development?
 
 ## USER
 
+User.destroy_all
+
+
 User.create!({
   first_name: "John",
   last_name: "Doe",
   email: "johndoe@gmail.com",
-  password_digest: 12345678
+  password: "12345678"
   })
+
+User.create!({
+  first_name: "Dan ",
+  last_name: "Doe",
+  email: "dandoe@gmail.com",
+  password: "123456789"
+  })
+
 
 ## CATEGORIES
 
@@ -53,6 +64,12 @@ product1.reviews.create!({
   description: "Great product. 10/10 would buy again",
   rating: 5,
   user_id: 1
+  })
+
+product1.reviews.create!({
+  description: "So-so, probably wouldn't buy again",
+  rating: 1,
+  user_id: 2
   })
 
 cat1.products.create!({
