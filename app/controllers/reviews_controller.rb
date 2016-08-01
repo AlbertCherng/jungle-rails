@@ -1,5 +1,11 @@
 class ReviewsController < ApplicationController
 
+before_filter :check_privileges!
+
+
+  def check_privileges!
+    redirect_to root_path, notice: 'You dont have enough permissions to be here' unless current_user
+  end
 
   def create
     @product = Product.find params[:product_id]
@@ -14,6 +20,13 @@ class ReviewsController < ApplicationController
     else
       redirect_to product_path(@product)
     end
+  end
+
+  def destroy
+    @review = Review.find params[:id]
+    @product = Product.find params[:product_id]
+    @review.destroy
+    redirect_to [@product], notice: 'Review deleted!'
   end
 
   private

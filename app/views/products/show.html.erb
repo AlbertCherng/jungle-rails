@@ -27,7 +27,7 @@
 
           <h3> User Reviews </h3>
 
-          <% @reviews.each do |review| %>
+          <% @reviews.order(created_at: :desc).each do |review| %>
 
           <dt>Product Ratings</dt>
           <dd> <%= review.rating %> </dd>
@@ -35,7 +35,18 @@
           <dd> <%= review.description  %> </dd>
           <br>
 
+          <% if current_user == review.user %>
+
+          <dt> Delete your review </dt>
+          <dd> <%= link_to fa_icon('trash'), [@product, review], class: 'btn btn-sm btn-danger', method: :delete %> </dd>
+          <br>
+
           <% end %>
+
+
+          <% end %>
+
+          <% if current_user %>
 
            <h3> Add your review </h3>
 
@@ -66,6 +77,7 @@
 
             <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
 
+          <% end %>
           <% end %>
 
 
