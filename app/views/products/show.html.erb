@@ -26,7 +26,9 @@
           <br>
 
           <h3> User Reviews </h3>
-
+          <% if @reviews.count == 0 %>
+          <h2> No reviews yet. Add one? </h2>
+          <% else %>
           <% @reviews.order(created_at: :desc).each do |review| %>
 
           <dt> User </dt>
@@ -35,7 +37,6 @@
           <dd> <%= review.rating %> </dd>
           <dt> Review Description </dt>
           <dd> <%= review.description  %> </dd>
-          <br>
 
           <% if current_user == review.user %>
 
@@ -45,7 +46,7 @@
 
           <% end %>
 
-
+          <% end %>
           <% end %>
 
           <% if current_user %>
