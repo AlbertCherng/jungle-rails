@@ -33,6 +33,17 @@
     </table>
   </div>
 
+  <% if !current_user %>
+    <h2> Please log-in or register to proceed with payment! </h2>
+<% else %>
+
+  <% if @cart_total == 0 %>
+
+  <div class="col-xs-12">
+  <h1> You have nothing in your cart! Try adding something. </h1>
+  </div>
+
+  <% else %>
   <div class="row">
     <div class="col-xs-12">
       <%= form_tag orders_path do %>
@@ -49,5 +60,7 @@
       <% end %>
     </div>
   </div>
+  <% end %>
+  <% end %>
 
 </section>

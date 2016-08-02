@@ -29,6 +29,8 @@
 
           <% @reviews.order(created_at: :desc).each do |review| %>
 
+          <dt> User </dt>
+          <dd> <%= review.user.first_name %>
           <dt>Product Ratings</dt>
           <dd> <%= review.rating %> </dd>
           <dt> Review Description </dt>
